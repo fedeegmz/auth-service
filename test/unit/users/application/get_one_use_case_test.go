@@ -1,6 +1,7 @@
 package application_test
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/fedeegmz/auth-service/internal/users/application"
@@ -15,7 +16,6 @@ func TestGetOneUseCase(t *testing.T) {
 
 		// Act
 		user, err := useCase.Execute("1")
-
 		// Assert
 		if err != nil {
 			t.Fatalf("expected 1 user, got %d", err)
@@ -44,7 +44,7 @@ func TestGetOneUseCase(t *testing.T) {
 		_, err := useCase.Execute("3")
 
 		// Assert
-		if err != dependencies.ErrUserNotFound {
+		if !errors.Is(err, dependencies.ErrUserNotFound) {
 			t.Errorf("user with id 3: expected %q, got %q", dependencies.ErrUserNotFound, err)
 		}
 	})

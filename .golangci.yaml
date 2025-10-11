@@ -1,0 +1,33 @@
+version: "2"
+
+run:
+  timeout: 5m
+  tests: true
+  skip-dirs:
+    - bin
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - staticcheck
+    - unused
+    - ineffassign
+    - misspell
+    - whitespace
+    - revive
+    - unconvert
+  settings:
+    revive:
+      rules:
+        - name: exported
+          disabled: true
+
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+    - golines
+    - swaggo

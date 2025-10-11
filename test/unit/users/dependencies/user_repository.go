@@ -6,9 +6,7 @@ import (
 	"github.com/fedeegmz/auth-service/internal/users/domain"
 )
 
-var (
-	ErrUserNotFound = errors.New("user not found")
-)
+var ErrUserNotFound = errors.New("user not found")
 
 type MockUserRepository struct {
 	users []domain.User
