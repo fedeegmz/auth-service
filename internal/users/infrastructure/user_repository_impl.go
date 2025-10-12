@@ -6,6 +6,11 @@ import (
 	"github.com/fedeegmz/auth-service/internal/users/domain"
 )
 
+var (
+	ErrUserNotFound   = errors.New("user not found")
+	ErrUsernameExists = errors.New("username exists")
+)
+
 type UserRepositoryImpl struct {
 	users []domain.User
 }
@@ -20,7 +25,17 @@ func (r *UserRepositoryImpl) GetOne(userId string) (domain.User, error) {
 			return user, nil
 		}
 	}
-	return domain.User{}, errors.New("user not found")
+	return domain.User{}, ErrUserNotFound
+}
+
+func (r *UserRepositoryImpl) SaveOne(user domain.User) error {
+	for _, u := range r.users {
+		if u.Username == user.Username {
+			return ErrUsernameExists
+		}
+	}
+	r.users = append(r.users, user)
+	return nil
 }
 
 func NewUserRepositoryImpl() *UserRepositoryImpl {
