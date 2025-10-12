@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auth-service-app
+    ports:
+      - "1323:1323"
+    volumes:
+      - ".:/app/"
+    command: >
+      sh -c "go run cmd/api/api.go"

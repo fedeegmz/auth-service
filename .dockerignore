@@ -1,0 +1,6 @@
+README.md
+LICENSE
+test/
+.github/
+.gitignore
+.pre-commit-config.yaml
