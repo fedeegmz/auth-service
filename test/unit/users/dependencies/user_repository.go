@@ -1,12 +1,9 @@
 package dependencies
 
 import (
-	"errors"
-
 	"github.com/fedeegmz/auth-service/internal/users/domain"
+	"github.com/fedeegmz/auth-service/internal/users/infrastructure"
 )
-
-var ErrUserNotFound = errors.New("user not found")
 
 type MockUserRepository struct {
 	users []domain.User
@@ -22,7 +19,17 @@ func (r *MockUserRepository) GetOne(userId string) (domain.User, error) {
 			return user, nil
 		}
 	}
-	return domain.User{}, ErrUserNotFound
+	return domain.User{}, infrastructure.ErrUserNotFound
+}
+
+func (r *MockUserRepository) SaveOne(user domain.User) error {
+	for _, u := range r.users {
+		if u.Username == user.Username {
+			return infrastructure.ErrUsernameExists
+		}
+	}
+	r.users = append(r.users, user)
+	return nil
 }
 
 func NewEmptyMockUserRepository() *MockUserRepository {
