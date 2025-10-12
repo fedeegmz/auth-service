@@ -19,5 +19,5 @@ jobs:
           verify: false
       - run: go version
       - run: make lint
-      - run: make format
+      - run: make fmt
       - run: make test
