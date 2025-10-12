@@ -9,14 +9,14 @@ type GetAllUseCase struct {
 	Repository domain.UserRepository
 }
 
-func (uc *GetAllUseCase) Execute() []dto.UserResponse {
+func (uc *GetAllUseCase) Execute() []dto.UserResponseDto {
 	users := uc.Repository.GetAll()
 
 	if len(users) == 0 {
-		return []dto.UserResponse{}
+		return []dto.UserResponseDto{}
 	}
 
-	responses := make([]dto.UserResponse, len(users))
+	responses := make([]dto.UserResponseDto, len(users))
 	for i, user := range users {
 		responses[i] = dto.FromDomain(user)
 	}

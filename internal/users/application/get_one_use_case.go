@@ -9,10 +9,10 @@ type GetOneUseCase struct {
 	Repository domain.UserRepository
 }
 
-func (uc *GetOneUseCase) Execute(userId string) (dto.UserResponse, error) {
+func (uc *GetOneUseCase) Execute(userId string) (dto.UserResponseDto, error) {
 	user, err := uc.Repository.GetOne(userId)
 	if err != nil {
-		return dto.UserResponse{}, err
+		return dto.UserResponseDto{}, err
 	}
 
 	return dto.FromDomain(user), nil

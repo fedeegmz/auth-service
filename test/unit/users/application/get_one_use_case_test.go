@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/fedeegmz/auth-service/internal/users/application"
+	"github.com/fedeegmz/auth-service/internal/users/infrastructure"
 	"github.com/fedeegmz/auth-service/test/unit/users/dependencies"
 )
 
@@ -44,8 +45,8 @@ func TestGetOneUseCase(t *testing.T) {
 		_, err := useCase.Execute("3")
 
 		// Assert
-		if !errors.Is(err, dependencies.ErrUserNotFound) {
-			t.Errorf("user with id 3: expected %q, got %q", dependencies.ErrUserNotFound, err)
+		if !errors.Is(err, infrastructure.ErrUserNotFound) {
+			t.Errorf("user with id 3: expected %q, got %q", infrastructure.ErrUserNotFound, err)
 		}
 	})
 }
