@@ -1,5 +1,8 @@
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,goland,windows,linux,macos,go
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,goland,windows,linux,macos,go
+# Created by https://www.toptal.com/developers/gitignore/api/go,linux,macos,goland,windows,visualstudiocode,dotenv
+# Edit at https://www.toptal.com/developers/gitignore?templates=go,linux,macos,goland,windows,visualstudiocode,dotenv
+
+### dotenv ###
+.env
 
 ### Go ###
 # If you prefer the allow list template instead of the deny list, see community template:
@@ -230,4 +233,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,goland,windows,linux,macos,go
+# End of https://www.toptal.com/developers/gitignore/api/go,linux,macos,goland,windows,visualstudiocode,dotenv
