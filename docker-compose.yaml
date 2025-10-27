@@ -1,12 +1,35 @@
 services:
+  db:
+    image: postgres:16-alpine
+    container_name: auth-service-db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   app:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: auth-service-app
     ports:
-      - "1323:1323"
+      - "${PORT}:1323"
     volumes:
       - ".:/app/"
+    depends_on:
+      db:
+        condition: service_healthy
     command: >
       sh -c "go run cmd/api/api.go"
+
+volumes:
+  postgres_data:

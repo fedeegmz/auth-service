@@ -4,10 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 	"time"
 
 	shared_domain "github.com/fedeegmz/auth-service/internal/shared/domain"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 var ErrConnectingDatabase = errors.New("database cannot be connected")
@@ -24,6 +26,7 @@ func ConnectDatabase(cfg shared_domain.DatabaseSettings) (*Database, error) {
 
 	db, err := sqlx.Connect("postgres", dsn)
 	if err != nil {
+		log.Println(err)
 		return nil, ErrConnectingDatabase
 	}
 
